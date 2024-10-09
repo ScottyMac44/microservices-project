@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Weather Reading API
+  description: Operations available to weather stations
+paths:
+  /readings/temperature:
+    post:
+      tags:
+        - station
+      summary: reports a temperature reading
+      operationId: app.report_temperature_reading
+      description: sends a temperature reading to the system in celcius
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemperatureReading'
+        description: Temperature reading to add
+        
+  /readings/pressure:
+    post:
+      tags:
+        - station
+      summary: reports a pressure reading
+      operationId: app.report_pressure_reading
+      description: sends a barometric pressure reading to the system in kPa
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PressureReading'
+        description: Pressure reading to add
+        
+components:
+  schemas:
+    TemperatureReading:
+      required:
+       - station_id
+       - thermometer_id
+       - temperature
+       - timestamp
+      properties:
+        station_id:
+          type: string
+          format: uuid
+          example: '2292f7d4-c407-432c-8aee-7672d48a5231'
+        thermometer_id:
+          type: string
+          example: 'T1234'
+        temperature:
+          type: integer
+          example: 28
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-09-05T10:32:00.0000'
+
+    PressureReading:
+      required:
+       - station_id
+       - barometer_id
+       - pressure
+       - timestamp
+      properties:
+        station_id:
+          type: string
+          format: uuid
+          example: '2182fd12-0b61-477f-aa0b-c1a936474f74'
+        barometer_id:
+          type: string
+          example: 'B1234'
+        pressure:
+          type: number
+          example: 101.54
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-09-05T10:32:00.0000'

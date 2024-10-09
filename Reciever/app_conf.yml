@@ -1,0 +1,5 @@
+version: 1
+eventstore1:
+  url: http://localhost:8090/readings/temperature
+eventstore2:
+  url: http://localhost:8090/readings/pressure
