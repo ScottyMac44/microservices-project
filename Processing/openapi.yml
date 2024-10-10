@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  description: This API provides event stats
+  version: "1.0.0"
+  title: Stats API
+  contact:
+    email: smcneill6@my.bcit.ca
+
+paths:
+  /stats:
+    get:
+      summary: Gets the event stats
+      operationId: app.get_stats
+      description: Gets Temperature and Air Pressure processsed statistics
+      responses:
+        '200':
+          description: Successfully returned a list of statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    ReadingStats:
+      required:
+        - mean_temperature
+        - mean_pressure
+        - num_temperature_readings
+        - num_pressure_readings
+      properties:
+        mean_temperature:
+          type: number
+          example: 25
+        mean_pressure:
+          type: number
+          example: 101.5
+        num_temperature_readings:
+          type: integer
+          example: 5000
+        num_pressure_readings:
+          type: integer
+          example: 5000
+      type: object
