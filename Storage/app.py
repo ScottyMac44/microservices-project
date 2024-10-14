@@ -2,6 +2,7 @@ import connexion
 from connexion import NoContent
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_
 from base import Base
 from pressure_reading import PressureReading
 from temperature_reading import TemperatureReading
@@ -73,12 +74,12 @@ def get_temperature_reading(start_timestamp, end_timestamp):
 
     session = DB_SESSION()
 
-    start_timestamp_datetime = datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
-    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = datetime.datetime.strptime(start_timestamp.split(".")[0], "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp.split(".")[0], "%Y-%m-%dT%H:%M:%S")
 
     results = session.query(TemperatureReading).filter(
-        TemperatureReading.date_created >= start_timestamp_datetime and
-        TemperatureReading.date_created < end_timestamp_datetime)
+        and_ (TemperatureReading.date_created >= start_timestamp_datetime,
+        TemperatureReading.date_created < end_timestamp_datetime))
     
     results_list = []
 
@@ -96,12 +97,12 @@ def get_pressure_reading(start_timestamp, end_timestamp):
 
     session = DB_SESSION()
 
-    start_timestamp_datetime = datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
-    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = datetime.datetime.strptime(start_timestamp.split(".")[0], "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp.split(".")[0], "%Y-%m-%dT%H:%M:%S")
 
-    results = session.query(TemperatureReading).filter(
-        PressureReading.date_created >= start_timestamp_datetime and
-        PressureReading.date_created < end_timestamp_datetime)
+    results = session.query(PressureReading).filter(
+        and_ (PressureReading.date_created >= start_timestamp_datetime,
+        PressureReading.date_created < end_timestamp_datetime))
     
     results_list = []
 
@@ -110,7 +111,7 @@ def get_pressure_reading(start_timestamp, end_timestamp):
 
     session.close()
 
-    logger.info("Query for Pressure readings after %s returns %d results" %(start_timestamp, len(results_list)))
+    logger.info("Query for Pressure readings after %s returns %d results" %(start_timestamp_datetime, len(results_list)))
 
     return results_list, 200
 

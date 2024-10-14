@@ -23,7 +23,7 @@ class PressureReading(Base):
         self.barometer_id = barometer_id
         self.pressure = pressure
         self.timestamp = timestamp
-        self.date_created = datetime.now() # Sets the date/time record is created
+        self.date_created = datetime.now().isoformat() # Sets the date/time record is created
         self.trace_id = trace_id
 
     def to_dict(self):

@@ -35,14 +35,14 @@ paths:
           schema:
             type: string
             format: date-time
-            example: 2016-08-29T09:12:33.001Z
+            example: 2016-08-29T09:12:33.0010Z
         - name: end_timestamp
           in: query
           description: limits the number of readings returned
           schema:
             type: string
             format: date-time
-            example: 2016-08-29T09:12:33.001Z
+            example: 2016-08-29T09:12:33.0010Z
       responses:
         '200':
           description: successfully returned a list of temperature reading events
@@ -93,14 +93,15 @@ paths:
           schema:
             type: string
             format: date-time
-            example: 2016-08-29T09:12:33.001Z
+            example: 2016-08-29T09:12:33.0010Z
         - name: end_timestamp
           in: query
           description: limits the number of readings returned
           schema:
             type: string
             format: date-time
-            example: 2016-08-29T09:12:33.001Z
+            example: 2016-08-29T09:12:33.0010Z
+
       responses:
         '200':
           description: successfully returned a list of pressure reading events
@@ -137,7 +138,7 @@ components:
           type: string
           example: 'T1234'
         temperature:
-          type: integer
+          type: number
           example: 28
         timestamp:
           type: string

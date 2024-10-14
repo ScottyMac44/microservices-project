@@ -1,6 +1,7 @@
 version: 1
 datastore:
-  filename: data.json
+  # filename: /home/spmcneill/microservices-project/Processing/data.json
+  filename: Processing/data.json
 scheduler:
   period_sec: 5
 eventstore:
