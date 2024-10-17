@@ -7,10 +7,10 @@ import yaml
 from connexion import NoContent
 import os.path
 
-with open('/home/spmcneill/microservices_project/Reciever/app_conf.yml', 'r') as f:
+with open('/home/spmcneill/BCIT/microservices_project/receiver/app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
 
-with open('/home/spmcneill/microservices_project/Reciever/log_conf.yml', 'r') as f:
+with open('/home/spmcneill/BCIT/microservices_project/receiver/log_conf.yml', 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger') # Move outside with block if causing problems

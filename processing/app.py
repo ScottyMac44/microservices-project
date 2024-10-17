@@ -9,13 +9,15 @@ import yaml
 import json
 import datetime
 
-with open('Processing/app_conf.yml', 'r') as f:
-    app_config = yaml.safe_load(f.read())
-
-with open('Processing/log_conf.yml', 'r') as f:
+with open('processing/log_conf.yml', 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger')
+
+with open('processing/app_conf.yml', 'r') as f:
+    app_config = yaml.safe_load(f.read())
+    logger.debug(f"App config: {app_config}")
+
 
 # Private function to load datastore, make requests to storage service,
 # calculate new stats, and return updated stats and end_timestamp

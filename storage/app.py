@@ -13,20 +13,25 @@ import yaml
 import logging
 import logging.config
 
-with open('Storage/app_conf.yml', 'r') as f:
+with open('storage/app_conf.yml', 'r') as f:
     conf = yaml.safe_load(f.read())
     dbdata = conf['datastore']
 
-with open('/home/spmcneill/microservices_project/Storage/log_conf.yml', 'r') as f:
+with open(dbdata['password_file'], 'r') as f:
+    mysql_password = f.read().strip()
+
+with open('/home/spmcneill/BCIT/microservices_project/storage/log_conf.yml', 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger') # Move outside with block if causing problems
 
 DB_ENGINE = create_engine(
-    f'mysql+pymysql://{dbdata["user"]}:{dbdata["password"]}@{dbdata["hostname"]}:{dbdata["port"]}/{dbdata["db"]}')
+    f'mysql+pymysql://{dbdata["user"]}:{mysql_password}@{dbdata["hostname"]}:{dbdata["port"]}/{dbdata["db"]}')
 
 Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
+
+logger.info(f'Successfully connected to database at mysql+pymysql://{dbdata["user"]}:---@{dbdata["hostname"]}:{dbdata["port"]}/{dbdata["db"]}')
 
 def report_temperature_reading(body):
     """ Recieves a temperature reading """

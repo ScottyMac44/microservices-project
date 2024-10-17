@@ -20,7 +20,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request Temperature">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request Temperature" enabled="true">
           <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -95,7 +95,7 @@
         </ConstantTimer>
         <hashTree/>
       </hashTree>
-      <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+      <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters">
         <collectionProp name="UserParameters.names">
           <stringProp name="-98470906">station_id</stringProp>
           <stringProp name="-955952620">thermometer_id</stringProp>

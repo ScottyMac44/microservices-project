@@ -6,7 +6,7 @@ import pymysql
 import mysql.connector
 import yaml
 
-with open('Storage/app_conf.yml', 'r') as f:
+with open('storage/app_conf.yml', 'r') as f:
     conf = yaml.safe_load(f.read())
     dbdata = conf['datastore']
 

@@ -1,7 +1,7 @@
 version: 1
 datastore:
   user: 'storage_service_user'
-  password: 'password'
-  hostname: 'localhost'
+  password_file: 'storage/mysql_password.txt'
+  hostname: 'ec2-54-189-29-156.us-west-2.compute.amazonaws.com'
   port: '3306'
   db: 'readings'
